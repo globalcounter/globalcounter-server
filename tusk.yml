@@ -2,7 +2,6 @@ tasks:
   setup:
     run:
       - command: cargo install cargo-watch
-      - command: cargo install releez
   dev:
     run:
       - command: cargo watch --watch ./src -x run
@@ -12,4 +11,4 @@ tasks:
       - command: ./target/release/globalcounter
   deploy:
     run:
-      - command: releez 0.0.0
+      - command: git push heroku master
