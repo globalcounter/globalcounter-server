@@ -1,4 +1,4 @@
-use crate::routes::ws::publish_counter_value;
+use crate::routes::ws::v1::publish_counter_value;
 use lazy_static::lazy_static;
 use tokio::sync::Mutex;
 

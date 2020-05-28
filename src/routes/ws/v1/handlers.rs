@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use crate::routes::ws::controllers;
+use crate::routes::ws::v1::controllers;
 use hyper::{Body, Request, Response};
 use routerify_websocket::WebSocket;
 

@@ -50,9 +50,10 @@ pub async fn startup_routes() -> crate::Result<()> {
         loop {
             info!("Next ws client shaking after: {:?}", period);
             time::delay_for(period).await;
-            ws::shake_client_registry().await;
+            ws::v1::shake_client_registry().await;
             info!("WS client shaking is done");
         }
     });
+
     Ok(())
 }

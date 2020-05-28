@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use crate::routes::ws::types::{ClientOutput, WsMessage};
+use crate::routes::ws::v1::types::{ClientOutput, WsMessage};
 use crate::utils;
 use futures::{stream::FuturesUnordered, SinkExt, StreamExt, TryStreamExt};
 use lazy_static::lazy_static;
