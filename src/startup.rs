@@ -5,6 +5,9 @@ pub async fn up() -> crate::Result<()> {
     dotenv::dotenv().ok();
     logger::init_logger();
     log_app_env();
+
+    crate::routes::startup_routes().await?;
+
     Ok(())
 }
 

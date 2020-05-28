@@ -4,8 +4,10 @@ use crate::utils;
 use hyper::{Body, Request, Response};
 use routerify::{Middleware, Router};
 use routerify_cors::enable_cors_all;
+use tokio::time::{self, Duration};
 
 mod api;
+mod ws;
 
 pub fn router() -> Router<Body, crate::Error> {
     Router::builder()
@@ -13,6 +15,7 @@ pub fn router() -> Router<Body, crate::Error> {
         .middleware(enable_cors_all())
         .get("/", home_get)
         .scope("/api", api::router())
+        .scope("/ws", ws::router())
         .err_handler(error_handler)
         .build()
         .unwrap()
@@ -39,4 +42,17 @@ async fn home_get(_: Request<Body>) -> crate::Result<Response<Body>> {
 async fn error_handler(err: routerify::Error) -> Response<Body> {
     error!("{}", err);
     resp_500!("{}", err).expect("Couldn't create a response while handling the server error")
+}
+
+pub async fn startup_routes() -> crate::Result<()> {
+    tokio::spawn(async move {
+        let period = Duration::from_secs(1 * 60 * 60);
+        loop {
+            info!("Next ws client shaking after: {:?}", period);
+            time::delay_for(period).await;
+            ws::shake_client_registry().await;
+            info!("WS client shaking is done");
+        }
+    });
+    Ok(())
 }

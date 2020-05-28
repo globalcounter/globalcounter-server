@@ -17,6 +17,7 @@ hyper = "0.13"
 routerify = "1.1"
 routerify-cors = "1.1"
 routerify-json-response = "1.1"
+routerify-websocket = { version = "1.0", features = ["json"] }
 tokio = { version = "0.2", features = ["full"] }
 dotenv = "0.15.0"
 colored = "1.9"
@@ -31,3 +32,5 @@ reqwest = { version = "0.10", features = ["json"] }
 lazy_static = "1.4.0"
 async-trait = "0.1"
 url = "2.1"
+futures = "0.3"
+sendify = "1.1"
